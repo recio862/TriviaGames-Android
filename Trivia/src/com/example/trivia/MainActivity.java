@@ -1,6 +1,8 @@
 package com.example.trivia;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,11 +10,31 @@ import android.view.MenuItem;
 
 public class MainActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+	SharedPreferences mPrefs;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		//Parse Code
+	/*	Parse.initialize(this, "ybMbNsW5K7M3tWC0hq5d2JJyiDDJfDW65eGRcYRc", "ny76yoFFCO2ACumEzDDzOqHs40udxmyaJkjHG5eo");
+		ParseObject.registerSubclass(Game.class);
+*/
+		
+		mPrefs = getSharedPreferences("ttt_prefs", MODE_PRIVATE);
+	
+		if (mPrefs.getBoolean("loggedOut", true)){
+			Intent intent = new Intent(getApplicationContext(), LoginMenu.class);
+			startActivity(intent);
+			finish();
+			return;
+		}
+
+		setContentView(R.layout.activity_main);
+	
+		mSoundOn = mPrefs.getBoolean("sound", true);
+
+
+	}
 
 
     @Override
