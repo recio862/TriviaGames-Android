@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
 		
 		mPrefs = getSharedPreferences("ttt_prefs", MODE_PRIVATE);
 	
+		
 		if (mPrefs.getBoolean("loggedOut", true)){
 			Intent intent = new Intent(getApplicationContext(), LoginMenu.class);
 			startActivity(intent);
